@@ -1,3 +1,5 @@
 # reactive-ionic-angular
 
-Reactive programming using RxJs in Ionic React
+- Angular 8
+- Ionic + Angular
+- Material Design for Drga and Drop and Modal boxes

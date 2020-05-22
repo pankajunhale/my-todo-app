@@ -102,16 +102,22 @@ export class TodoContainerComponent implements OnInit {
   }
 
   //
-  openConfirmDialog(listId: number, cardId: number): void {
+  openConfirmDialog(listId: number, cardId: number, actionType: string): void {
     const dialogRef = this.dialog.open(YesNoComponent, {
       width: '500px',
-      data: this.vm.findYesNoConfiguration('Confirm delete', 'Are you sure? You want to delete the entry')
+      data: this.vm.findYesNoConfiguration('Confirm delete', 'Are you sure? You want to delete the entry.')
     });
 
     dialogRef.afterClosed().subscribe(isRemoveCard => {
-      console.log('The dialog was closed', isRemoveCard);
-      if (isRemoveCard) {
-        this.removeCard(listId, cardId);
+      if (actionType === 'REMOVE_LIST') {
+        if (isRemoveCard) {
+          this.removeList(listId);
+        }
+      }
+      if (actionType === 'REMOVE_CARD') {
+        if (isRemoveCard) {
+          this.removeCard(listId, cardId);
+        }
       }
     });
   }
@@ -119,11 +125,10 @@ export class TodoContainerComponent implements OnInit {
   openAddDialog(actionType: string, listItem: CardListModel) {
     const dialogRef = this.dialog.open(CardComponent, {
       width: '500px',
-      data:{type: actionType}
+      data: { type: actionType }
     });
 
     dialogRef.afterClosed().subscribe((obj: any) => {
-      debugger;
       if (obj.action === 'ADD_LIST') {
         this.createList(obj.data.name);
       }
