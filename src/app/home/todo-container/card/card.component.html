@@ -1,0 +1,21 @@
+<div>
+  <ion-list>
+    <ion-item>
+      <h4>Create new card</h4>
+    </ion-item>
+    <form [formGroup]="form">
+      <div style='margin: 10px;padding-top: 20px;'>
+        <label>Name:
+          <input formControlName="name">
+        </label>
+      </div>
+      <div style='float: right;'>
+        <ion-button [disabled]="form.invalid" (click)="onConfirm();" color="success">Add</ion-button>
+        <ion-button (click)="onCancelClick();" color="success">Cancel</ion-button>
+      </div>
+    </form>
+  </ion-list>
+</div>
+<div>
+
+</div>

@@ -1,0 +1,22 @@
+<ion-list>
+  <ion-item>
+    <ion-button (click)="openAddDialog('ADD_LIST',null);" color="tertiary">Create List</ion-button>
+  </ion-item>
+  <ion-item>
+    <div cdkDropListGroup>
+      <ng-container *ngFor="let item of vm.cardListModel; let i = index">
+        <div class="example-container">          
+          <div cdkDropList [id]="item.id" [cdkDropListData]="item.toDoList" class="example-list"cdkDropListSortingDisabled (cdkDropListExited)="removeFromContainer($event);"  (cdkDropListDropped)="drop($event,item);">
+            <h3>
+              {{item.name}}<a (click)="openAddDialog('ADD_CARD',item)" href="javascript:void(0);">Add Card</a><span>|</span><a href="javascript:void(0);" (click)="removeList(item.id)">Remove</a>            
+            </h3>
+            <div class="example-box" *ngFor="let childItem of item.toDoList;" cdkDrag>
+              {{childItem.name}}
+              <a href="javascript:void(0);" (click)="$event.stopPropagation();openConfirmDialog(item.id,childItem.id);"> Remove </a>
+            </div>            
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ion-item>
+</ion-list>
